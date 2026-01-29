@@ -1,46 +1,59 @@
-import { Link } from 'react-router-dom';
+﻿'use client';
 
-export default function RecipeCard({ meal, showSaveButton = false, onSave }) {
+import Link from 'next/link';
+import Image from 'next/image'; // 1. Impor komponen Image
+import { HiOutlineHeart, HiHeart, HiArrowRight } from 'react-icons/hi';
+
+export default function RecipeCard({ meal, showSaveButton = false, onSave, isSaved = false }) {
+  const name = meal.strMeal || meal.mealName;
+  const image = meal.strMealThumb || meal.thumbnail;
+  const category = meal.strCategory || meal.category;
+  const area = meal.strArea || meal.area;
+  const id = meal.idMeal || meal.mealId;
+
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <img
-        src={meal.strMealThumb || meal.thumbnail}
-        alt={meal.strMeal || meal.mealName}
-        className="w-full h-48 object-cover"
-      />
-      <div className="p-4">
-        <h3 className="font-semibold text-lg mb-2 line-clamp-1">
-          {meal.strMeal || meal.mealName}
-        </h3>
-        <div className="flex gap-2 mb-3">
-          {(meal.strCategory || meal.category) && (
-            <span className="bg-orange-100 text-orange-600 text-xs px-2 py-1 rounded">
-              {meal.strCategory || meal.category}
-            </span>
-          )}
-          {(meal.strArea || meal.area) && (
-            <span className="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded">
-              {meal.strArea || meal.area}
-            </span>
-          )}
-        </div>
-        <div className="flex gap-2">
-          <Link
-            to={`/recipe/${meal.idMeal || meal.mealId}`}
-            className="flex-1 bg-orange-500 text-white text-center py-2 rounded-lg hover:bg-orange-600"
+    <div className="card group hover:-translate-y-2 transition-all duration-300">
+      <div className="relative -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-3xl h-52">
+        {/* 2. Gunakan Next.js Image Component */}
+        <Image 
+          src={image} 
+          alt={name} 
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent" />
+        
+        {showSaveButton && onSave && (
+          <button
+            onClick={(e) => { 
+              e.preventDefault(); 
+              e.stopPropagation(); 
+              onSave(meal); 
+            }}
+            className="absolute top-4 right-4 w-10 h-10 rounded-full glass flex items-center justify-center transition-all duration-300 hover:bg-white/20 hover:scale-110 z-10"
           >
-            Lihat Detail
-          </Link>
-          {showSaveButton && onSave && (
-            <button
-              onClick={() => onSave(meal)}
-              className="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600"
-            >
-              Simpan
-            </button>
-          )}
+            {isSaved ? <HiHeart className="w-5 h-5 text-red-500" /> : <HiOutlineHeart className="w-5 h-5 text-white" />}
+          </button>
+        )}
+
+        <div className="absolute bottom-4 left-4 flex gap-2">
+          {category && <span className="badge badge-orange">{category}</span>}
+          {area && <span className="badge badge-blue">{area}</span>}
         </div>
       </div>
+
+      <h3 className="font-bold text-lg text-white mb-4 line-clamp-1 group-hover:text-orange-400 transition-colors">
+        {name}
+      </h3>
+
+      <Link
+        href={`/recipe/${id}`}
+        className="flex items-center justify-between w-full px-5 py-3 rounded-xl bg-white/5 border border-white/10 text-gray-300 hover:bg-orange-500 hover:text-white hover:border-orange-500 transition-all duration-300 group/btn"
+      >
+        <span className="font-medium">Lihat Resep</span>
+        <HiArrowRight className="w-5 h-5 transition-transform group-hover/btn:translate-x-1" />
+      </Link>
     </div>
   );
 }

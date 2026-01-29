@@ -107,7 +107,7 @@ export const login = async (req, res, next) => {
 };
 
 // Refresh Token
-export const refresh = async (req, res, next) => {
+export const refresh = async (req, res, _next) => {
   try {
     const { refreshToken } = req.cookies;
 
@@ -156,6 +156,7 @@ export const refresh = async (req, res, next) => {
       data: { accessToken: newAccessToken },
     });
   } catch (error) {
+    console.error('Refresh token error:', error);
     return res.status(403).json({ success: false, message: 'Invalid refresh token' });
   }
 };

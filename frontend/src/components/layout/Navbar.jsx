@@ -1,73 +1,130 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../store/authStore';
-import { authService } from '../../services/authService';
+﻿'use client';
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAuthStore } from '@/store/authStore';
+import { authService } from '@/lib/services';
 import toast from 'react-hot-toast';
+import { HiMenu, HiX } from 'react-icons/hi';
 
 export default function Navbar() {
   const { isAuthenticated, user, logout } = useAuthStore();
-  const navigate = useNavigate();
+  const router = useRouter();
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = async () => {
     try {
       await authService.logout();
-      logout();
-      toast.success('Logout berhasil');
-      navigate('/login');
     } catch (error) {
-      logout();
-      navigate('/login');
+      // Menangani error agar tidak muncul peringatan "empty block"
+      console.error('Logout error:', error);
     }
+    logout();
+    toast.success('Logout berhasil');
+    router.push('/login');
   };
 
+  const navLinks = [
+    { href: '/', label: 'Beranda' },
+    { href: '/explore', label: 'Jelajahi' },
+    ...(isAuthenticated
+      ? [
+          { href: '/my-recipes', label: 'Koleksi' },
+          { href: '/ingredients', label: 'Bahan' },
+        ]
+      : []),
+  ];
+
+  const isActive = (path) => pathname === path;
+
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <Link to="/" className="text-2xl font-bold text-orange-500">
-            🍳 ResepKu
+    <nav className="sticky top-0 z-50 glass border-b border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-20">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-2xl shadow-lg shadow-orange-500/30 group-hover:shadow-orange-500/50 transition-shadow">
+              🍳 {/* Perbaikan emoji yang korup */}
+            </div>
+            <span className="text-2xl font-bold text-white">
+              Resep<span className="text-orange-400">Ku</span>
+            </span>
           </Link>
 
-          <div className="flex items-center gap-6">
-            <Link to="/explore" className="text-gray-600 hover:text-orange-500">
-              Jelajahi
-            </Link>
+          <div className="hidden md:flex items-center gap-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`px-4 py-2 rounded-xl font-medium transition-all duration-300 ${
+                  isActive(link.href)
+                    ? 'bg-orange-500/20 text-orange-400'
+                    : 'text-gray-400 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
 
+          <div className="hidden md:flex items-center gap-3">
             {isAuthenticated ? (
-              <>
-                <Link to="/my-recipes" className="text-gray-600 hover:text-orange-500">
-                  Koleksi Saya
-                </Link>
-                <Link to="/ingredients" className="text-gray-600 hover:text-orange-500">
-                  Bahan Saya
-                </Link>
+              <div className="flex items-center gap-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-gray-600">Halo, {user?.name}</span>
-                  <button
-                    onClick={handleLogout}
-                    className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
-                  >
-                    Logout
-                  </button>
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white font-bold">
+                    {user?.name?.charAt(0).toUpperCase()}
+                  </div>
+                  <span className="text-white font-medium">{user?.name}</span>
                 </div>
-              </>
-            ) : (
-              <div className="flex gap-3">
-                <Link
-                  to="/login"
-                  className="text-orange-500 border border-orange-500 px-4 py-2 rounded-lg hover:bg-orange-50"
-                >
-                  Masuk
-                </Link>
-                <Link
-                  to="/register"
-                  className="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600"
-                >
-                  Daftar
-                </Link>
+                <button onClick={handleLogout} className="btn-ghost text-sm">Logout</button>
               </div>
+            ) : (
+              <>
+                <Link href="/login" className="btn-ghost">Masuk</Link>
+                <Link href="/register" className="btn-primary text-sm py-2">Daftar</Link>
+              </>
             )}
           </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 rounded-xl text-white hover:bg-white/10 transition-colors"
+          >
+            {isOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+          </button>
         </div>
+
+        {isOpen && (
+          <div className="md:hidden py-4 border-t border-white/10">
+            <div className="flex flex-col gap-2">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className={`px-4 py-3 rounded-xl font-medium transition-colors ${
+                    isActive(link.href)
+                      ? 'bg-orange-500/20 text-orange-400'
+                      : 'text-gray-400 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="border-t border-white/10 mt-2 pt-4">
+                {isAuthenticated ? (
+                  <button onClick={handleLogout} className="btn-secondary w-full">Logout</button>
+                ) : (
+                  <div className="flex flex-col gap-2">
+                    <Link href="/login" onClick={() => setIsOpen(false)} className="btn-secondary text-center">Masuk</Link>
+                    <Link href="/register" onClick={() => setIsOpen(false)} className="btn-primary text-center">Daftar</Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
