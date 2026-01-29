@@ -18,7 +18,6 @@ export default function Navbar() {
     try {
       await authService.logout();
     } catch (error) {
-      // Menangani error agar tidak muncul peringatan "empty block"
       console.error('Logout error:', error);
     }
     logout();
@@ -43,15 +42,22 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50 glass border-b border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-2xl shadow-lg shadow-orange-500/30 group-hover:shadow-orange-500/50 transition-shadow">
-              🍳 {/* Perbaikan emoji yang korup */}
-            </div>
-            <span className="text-2xl font-bold text-white">
-              Resep<span className="text-orange-400">Ku</span>
-            </span>
-          </Link>
+            {/* Logo */}
+            <Link href="/" className="flex items-center gap-2">
+              <img
+                src="/logo-hero.png"
+                alt="ResepKu Icon"
+                className="h-auto w-10 object-contain"
+              />
+              <img
+                src="/logo-text.png"
+                alt="ResepKu"
+                className="h-8 w-auto object-contain"
+              />
+            </Link>
 
+
+          {/* Desktop Nav Links */}
           <div className="hidden md:flex items-center gap-2">
             {navLinks.map((link) => (
               <Link
@@ -68,6 +74,7 @@ export default function Navbar() {
             ))}
           </div>
 
+          {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center gap-3">
             {isAuthenticated ? (
               <div className="flex items-center gap-4">
@@ -77,16 +84,23 @@ export default function Navbar() {
                   </div>
                   <span className="text-white font-medium">{user?.name}</span>
                 </div>
-                <button onClick={handleLogout} className="btn-ghost text-sm">Logout</button>
+                <button onClick={handleLogout} className="btn-ghost text-sm">
+                  Logout
+                </button>
               </div>
             ) : (
               <>
-                <Link href="/login" className="btn-ghost">Masuk</Link>
-                <Link href="/register" className="btn-primary text-sm py-2">Daftar</Link>
+                <Link href="/login" className="btn-ghost">
+                  Masuk
+                </Link>
+                <Link href="/register" className="btn-primary text-sm py-2">
+                  Daftar
+                </Link>
               </>
             )}
           </div>
 
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 rounded-xl text-white hover:bg-white/10 transition-colors"
@@ -95,6 +109,7 @@ export default function Navbar() {
           </button>
         </div>
 
+        {/* Mobile Menu */}
         {isOpen && (
           <div className="md:hidden py-4 border-t border-white/10">
             <div className="flex flex-col gap-2">
@@ -114,11 +129,25 @@ export default function Navbar() {
               ))}
               <div className="border-t border-white/10 mt-2 pt-4">
                 {isAuthenticated ? (
-                  <button onClick={handleLogout} className="btn-secondary w-full">Logout</button>
+                  <button onClick={handleLogout} className="btn-secondary w-full">
+                    Logout
+                  </button>
                 ) : (
                   <div className="flex flex-col gap-2">
-                    <Link href="/login" onClick={() => setIsOpen(false)} className="btn-secondary text-center">Masuk</Link>
-                    <Link href="/register" onClick={() => setIsOpen(false)} className="btn-primary text-center">Daftar</Link>
+                    <Link
+                      href="/login"
+                      onClick={() => setIsOpen(false)}
+                      className="btn-secondary text-center"
+                    >
+                      Masuk
+                    </Link>
+                    <Link
+                      href="/register"
+                      onClick={() => setIsOpen(false)}
+                      className="btn-primary text-center"
+                    >
+                      Daftar
+                    </Link>
                   </div>
                 )}
               </div>

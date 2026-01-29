@@ -38,6 +38,7 @@ export default [
       ...hooksPlugin.configs.recommended.rules,
       ...nextPlugin.configs.recommended.rules,
       ...nextPlugin.configs["core-web-vitals"].rules,
+      "@next/next/no-img-element": "off",
       "react/react-in-jsx-scope": "off", // Tidak perlu di Next.js
       "react/prop-types": "off",         // Karena pakai TypeScript
     },

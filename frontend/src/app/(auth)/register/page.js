@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/lib/services';
 import { useAuthStore } from '@/store/authStore';
@@ -34,8 +35,15 @@ export default function RegisterPage() {
       <div className="w-full max-w-md">
         <div className="card p-8">
           <div className="text-center mb-8">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-4xl shadow-lg shadow-orange-500/30">
-              ðŸ³
+            {/* Logo ResepKu */}
+            <div className="inline-block mb-4">
+              <Image
+                src="/logo-hero.png"
+                alt="ResepKu Logo"
+                width={80}
+                height={80}
+                className="mx-auto drop-shadow-lg"
+              />
             </div>
             <h1 className="text-2xl font-bold text-white">Buat Akun</h1>
             <p className="text-gray-400 mt-2">Mulai koleksi resepmu sekarang</p>
@@ -46,7 +54,14 @@ export default function RegisterPage() {
               <label className="block text-gray-300 font-medium mb-2 text-sm">Nama</label>
               <div className="relative">
                 <HiUser className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
-                <input type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="input-dark pl-12" placeholder="Nama lengkap" required />
+                <input 
+                  type="text" 
+                  value={form.name} 
+                  onChange={(e) => setForm({ ...form, name: e.target.value })} 
+                  className="input-dark pl-12" 
+                  placeholder="Nama lengkap" 
+                  required 
+                />
               </div>
             </div>
 
@@ -54,7 +69,14 @@ export default function RegisterPage() {
               <label className="block text-gray-300 font-medium mb-2 text-sm">Email</label>
               <div className="relative">
                 <HiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
-                <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className="input-dark pl-12" placeholder="nama@email.com" required />
+                <input 
+                  type="email" 
+                  value={form.email} 
+                  onChange={(e) => setForm({ ...form, email: e.target.value })} 
+                  className="input-dark pl-12" 
+                  placeholder="nama@email.com" 
+                  required 
+                />
               </div>
             </div>
 
@@ -62,17 +84,36 @@ export default function RegisterPage() {
               <label className="block text-gray-300 font-medium mb-2 text-sm">Password</label>
               <div className="relative">
                 <HiLockClosed className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-5 h-5" />
-                <input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} className="input-dark pl-12" placeholder="Min. 6 karakter" minLength={6} required />
+                <input 
+                  type="password" 
+                  value={form.password} 
+                  onChange={(e) => setForm({ ...form, password: e.target.value })} 
+                  className="input-dark pl-12" 
+                  placeholder="Min. 6 karakter" 
+                  minLength={6} 
+                  required 
+                />
               </div>
             </div>
 
-            <button type="submit" disabled={loading} className="w-full btn-primary py-4 flex items-center justify-center gap-2">
-              {loading ? 'Memproses...' : (<>Daftar <HiArrowRight className="w-5 h-5" /></>)}
+            <button 
+              type="submit" 
+              disabled={loading} 
+              className="w-full btn-primary py-4 flex items-center justify-center gap-2"
+            >
+              {loading ? 'Memproses...' : (
+                <>
+                  Daftar <HiArrowRight className="w-5 h-5" />
+                </>
+              )}
             </button>
           </form>
 
           <p className="text-center mt-6 text-gray-400">
-            Sudah punya akun? <Link href="/login" className="text-orange-400 font-semibold hover:underline">Masuk</Link>
+            Sudah punya akun?{' '}
+            <Link href="/login" className="text-orange-400 font-semibold hover:underline">
+              Masuk
+            </Link>
           </p>
         </div>
       </div>

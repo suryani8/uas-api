@@ -9,17 +9,27 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
   if (typeof window !== 'undefined') {
     const authStorage = localStorage.getItem('auth-storage');
+    console.log('Auth storage:', authStorage); // Debug
+    
     if (authStorage) {
-      const { state } = JSON.parse(authStorage);
-      if (state?.accessToken) {
-        config.headers.Authorization = `Bearer ${state.accessToken}`;
+      try {
+        const { state } = JSON.parse(authStorage);
+        const token = state?.accessToken;
+        console.log('Token found:', token ? 'Yes' : 'No'); // Debug
+        
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+          console.log('Authorization header set'); // Debug
+        }
+      } catch (e) {
+        console.error('Error parsing auth storage:', e);
       }
     }
   }
   return config;
 });
 
-// Response interceptor
+// Response interceptor (tetap sama)
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
