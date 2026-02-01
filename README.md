@@ -139,3 +139,28 @@ npm run dev
 
 ### 7. Halaman Detail Resep
 ![Halaman Detail](./tampilanWeb/detailresep.png)
+
+## Penawaran
+
+Pengembangan aplikasi ResepKu didasarkan pada prinsip alokasi sumber daya yang efektif untuk menghasilkan platform manajemen kuliner yang komprehensif. Dengan mengintegrasikan teknologi fullstack yang modern dan antarmuka yang intuitif, aplikasi ini memastikan bahwa setiap fitur yang dikembangkan memberikan nilai guna yang maksimal sesuai dengan perencanaan kebutuhan pengguna.
+
+### 1. Tujuan Pengembangan Berbasis Fungsionalitas
+Aplikasi ini dirancang untuk mencapai target spesifik dalam mempermudah akses informasi memasak:
+
+Optimalisasi Pencarian Resep: Melalui integrasi TheMealDB API, sistem menyediakan akses ke ribuan data resep global secara efisien.
+
+Efisiensi Pengelolaan Bahan: Fitur "Cari Berdasarkan Bahan" memungkinkan pengguna menginput stok bahan yang tersedia untuk mendapatkan rekomendasi masakan yang relevan, guna menekan pemborosan sumber daya pangan.
+
+Keamanan dan Personalisasi Data: Implementasi sistem login dan register yang didukung oleh JWT dan Bcrypt memastikan setiap pengguna dapat menyimpan koleksi resep favorit dan catatan pribadi secara aman.
+
+### 2. Implementasi Visual dan Teknologi Terpadu
+Penawaran ini didukung oleh tampilan antarmuka yang telah diimplementasikan secara sistematis:
+
+Antarmuka Pengguna yang Intuitif: Tampilan halaman Beranda, Jelajahi, dan Koleksi dirancang dengan estetika dark mode yang bersih untuk meningkatkan kenyamanan navigasi.
+
+Detail Resep yang Informatif: Halaman detail resep menyajikan informasi bahan secara terperinci serta akses ke video tutorial, memastikan target fungsionalitas edukasi kuliner tercapai sepenuhnya.
+
+Stabilitas Infrastruktur: Penggunaan Next.js, Express.js, dan Prisma ORM menjamin bahwa sistem beroperasi dengan performa tinggi dan pengelolaan database MySQL yang akurat.
+
+### 3. Kesimpulan Penawaran
+Secara objektif, ResepKu membuktikan bahwa perencanaan yang matang pada aspek teknologi dan desain antarmuka dapat menghasilkan produk yang selaras dengan ekspektasi pengguna. Dengan menggabungkan kemudahan pencarian resep dan manajemen bahan makanan, aplikasi ini memberikan jaminan efisiensi informasi yang terukur bagi setiap penggunanya.
