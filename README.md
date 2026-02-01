@@ -140,27 +140,34 @@ npm run dev
 ### 7. Halaman Detail Resep
 ![Halaman Detail](./tampilanWeb/detailresep.png)
 
-## Penawaran
+## 📢 Penawaran & Fitur Unggulan
 
-Pengembangan aplikasi ResepKu didasarkan pada prinsip alokasi sumber daya yang efektif untuk menghasilkan platform manajemen kuliner yang komprehensif. Dengan mengintegrasikan teknologi fullstack yang modern dan antarmuka yang intuitif, aplikasi ini memastikan bahwa setiap fitur yang dikembangkan memberikan nilai guna yang maksimal sesuai dengan perencanaan kebutuhan pengguna.
+Aplikasi **ResepKu** hadir sebagai solusi digital untuk manajemen kuliner yang efisien dan modern. Berikut adalah nilai tambah yang kami tawarkan:
 
-### 1. Tujuan Pengembangan Berbasis Fungsionalitas
-Aplikasi ini dirancang untuk mencapai target spesifik dalam mempermudah akses informasi memasak:
+### 🎁 Penawaran Pengguna
+**Gratis Akses Penuh untuk Pengguna Baru** Nikmati seluruh ekosistem ResepKu tanpa biaya berlangganan. Cukup daftar dan akses fitur berikut:
+* **Registrasi & Login:** Akun personal untuk pengalaman yang lebih privat.
+* **Eksplorasi Tanpa Batas:** Jelajahi ratusan resep dari database global.
+* **Koleksi Personal:** Simpan resep pilihan ke dalam daftar favorit.
+* **Smart Search:** Cari resep hanya dengan menginput stok bahan yang ada.
 
-Optimalisasi Pencarian Resep: Melalui integrasi TheMealDB API, sistem menyediakan akses ke ribuan data resep global secara efisien.
+---
 
-Efisiensi Pengelolaan Bahan: Fitur "Cari Berdasarkan Bahan" memungkinkan pengguna menginput stok bahan yang tersedia untuk mendapatkan rekomendasi masakan yang relevan, guna menekan pemborosan sumber daya pangan.
+### 🔥 Fitur Utama
+| Fitur | Deskripsi |
+| :--- | :--- |
+| **Pencarian Berbasis Bahan** | Masukkan bahan yang tersedia, sistem akan merekomendasikan masakan yang relevan. |
+| **Koleksi Favorit** | Simpan dan kelola resep pilihan Anda dalam satu halaman khusus. |
+| **Detail Resep Lengkap** | Informasi bahan terperinci disertai langkah memasak yang sistematis. |
+| **Keamanan Terjamin** | Perlindungan data menggunakan *JSON Web Token (JWT)* dan enkripsi *Bcrypt*. |
 
-Keamanan dan Personalisasi Data: Implementasi sistem login dan register yang didukung oleh JWT dan Bcrypt memastikan setiap pengguna dapat menyimpan koleksi resep favorit dan catatan pribadi secara aman.
+---
 
-### 2. Implementasi Visual dan Teknologi Terpadu
-Penawaran ini didukung oleh tampilan antarmuka yang telah diimplementasikan secara sistematis:
+### 🎯 Target Pengguna
+ResepKu dirancang secara inklusif untuk berbagai kalangan:
+* **Personal:** Mahasiswa (masak hemat) & Ibu Rumah Tangga.
+* **Komunitas:** Pecinta kuliner yang ingin mencoba variasi masakan baru.
+* **Edukasi:** Sebagai referensi/media pembelajaran mata kuliah Pemrograman Web.
+* **Bisnis:** Referensi digitalisasi aplikasi bagi pelaku UMKM kuliner.
 
-Antarmuka Pengguna yang Intuitif: Tampilan halaman Beranda, Jelajahi, dan Koleksi dirancang dengan estetika dark mode yang bersih untuk meningkatkan kenyamanan navigasi.
-
-Detail Resep yang Informatif: Halaman detail resep menyajikan informasi bahan secara terperinci serta akses ke video tutorial, memastikan target fungsionalitas edukasi kuliner tercapai sepenuhnya.
-
-Stabilitas Infrastruktur: Penggunaan Next.js, Express.js, dan Prisma ORM menjamin bahwa sistem beroperasi dengan performa tinggi dan pengelolaan database MySQL yang akurat.
-
-### 3. Kesimpulan Penawaran
-Secara objektif, ResepKu membuktikan bahwa perencanaan yang matang pada aspek teknologi dan desain antarmuka dapat menghasilkan produk yang selaras dengan ekspektasi pengguna. Dengan menggabungkan kemudahan pencarian resep dan manajemen bahan makanan, aplikasi ini memberikan jaminan efisiensi informasi yang terukur bagi setiap penggunanya.
+---
